@@ -190,6 +190,7 @@ function initializeDatabase() {
         db.run("INSERT INTO Listing (prdct_id, sellr_id, ctgry_id, listg_title, listg_format, listg_startprice, listg_fixedprice, listg_bestoffer, listg_status, listg_quantity, listg_startdate, listg_enddate) VALUES (1, 1, 2, 'Vintage Leather Jacket', 'Auction', 45.00, NULL, 'No', 'Active', 1, '2026-05-01', '2026-05-10')");
         db.run("INSERT INTO Product (sellr_id, prdct_name, prdct_brand, prdct_cond, prdct_desc) VALUES (1, 'Sony Alpha a7 III', 'Sony', 'New', 'Brand new in box')");
         db.run("INSERT INTO Listing (prdct_id, sellr_id, ctgry_id, listg_title, listg_format, listg_startprice, listg_fixedprice, listg_bestoffer, listg_status, listg_quantity, listg_startdate, listg_enddate) VALUES (2, 1, 1, 'Sony Alpha a7 III Mirrorless Camera', 'Fixed Price', 1800.00, 1800.00, 'Yes', 'Active', 5, '2026-05-01', '2026-05-30')");
+        db.run("INSERT INTO Courier (courr_name, courr_phone, courr_email) VALUES ('J&T Express', '09123456789', 'support@jtexpress.ph'), ('LBC Express', '09198765432', 'customercare@lbcexpress.com')");
       }
     });
   });
