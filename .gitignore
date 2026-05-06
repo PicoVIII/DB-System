@@ -11,6 +11,10 @@ frontend/.env
 # Build outputs
 dist/
 frontend/dist/
+.next/
+frontend/.next/
+out/
+build/
 
 # SQLite database
 backend/*.db
