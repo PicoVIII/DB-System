@@ -197,6 +197,45 @@ app.post('/api/shipments', (req, res) => {
   });
 });
 
+// --- Products & Inventory ---
+
+// Add Product Profile
+app.post('/api/products', (req, res) => {
+  const { sellr_id, name, brand, condition, desc } = req.body;
+  const sql = `INSERT INTO Product (sellr_id, prdct_name, prdct_brand, prdct_cond, prdct_desc) VALUES (?, ?, ?, ?, ?)`;
+  db.run(sql, [sellr_id, name, brand, condition, desc], function(err) {
+    if (err) return res.status(400).json({ error: err.message });
+    res.json({ message: 'Product profile created', id: this.lastID });
+  });
+});
+
+// Get Products for Seller
+app.get('/api/products/seller/:sellr_id', (req, res) => {
+  db.all(`SELECT * FROM Product WHERE sellr_id = ?`, [req.params.sellr_id], (err, rows) => {
+    if (err) return res.status(400).json({ error: err.message });
+    res.json({ data: rows });
+  });
+});
+
+// Create Listing
+app.post('/api/listings', (req, res) => {
+  const { prdct_id, sellr_id, ctgry_id, title, format, startprice, fixedprice, bestoffer, status, quantity, startdate, enddate } = req.body;
+  const sql = `INSERT INTO Listing (prdct_id, sellr_id, ctgry_id, listg_title, listg_format, listg_startprice, listg_fixedprice, listg_bestoffer, listg_status, listg_quantity, listg_startdate, listg_enddate) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  db.run(sql, [prdct_id, sellr_id, ctgry_id, title, format, startprice, fixedprice, bestoffer, status, quantity, startdate, enddate], function(err) {
+    if (err) return res.status(400).json({ error: err.message });
+    res.json({ message: 'Listing created', id: this.lastID });
+  });
+});
+
+// Get Categories
+app.get('/api/categories', (req, res) => {
+  db.all(`SELECT * FROM Category`, [], (err, rows) => {
+    if (err) return res.status(400).json({ error: err.message });
+    res.json({ data: rows });
+  });
+});
+
 // --- Feedback ---
 app.post('/api/feedback', (req, res) => {
   const { listg_id, buyer_id, sellr_id, comment, type } = req.body;

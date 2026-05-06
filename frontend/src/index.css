@@ -1,7 +1,0 @@
-@import "tailwindcss";
-
-@layer utilities {
-  .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-lg;
-  }
-}
